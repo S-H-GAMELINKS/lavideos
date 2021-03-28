@@ -5,3 +5,5 @@
         <p>{{$video->url}}</p>
     @endforeach
 @endsection
+
+<a href="/videos/create">New</a>
