@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Storage;
 
 class VideoController extends Controller
 {
@@ -26,7 +27,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        //
+        return view('videos.create');
     }
 
     /**
@@ -37,7 +38,15 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $video = new Video();
+
+        $image = $request->file('video');
+        $path = Storage::disk('s3')->putFile('videos', $image, 'public');
+        $video->url = Storage::disk('s3')->url($path);
+  
+        $video->save();
+
+        return redirect('/videos');
     }
 
     /**
