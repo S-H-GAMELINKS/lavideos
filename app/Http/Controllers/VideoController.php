@@ -43,6 +43,7 @@ class VideoController extends Controller
         $image = $request->file('video');
         $path = Storage::disk('s3')->putFile('videos', $image, 'public');
         $video->url = Storage::disk('s3')->url($path);
+        $video->url = str_replace(env("AWS_S3_PATH"), env("AWS_CLOUD_FRONT_PATH"), $video->url);
   
         $video->save();
 
