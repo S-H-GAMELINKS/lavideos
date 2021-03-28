@@ -2,7 +2,7 @@
 
 @section('content')
     @foreach($videos as $video)
-        <p>{{$video->url}}</p>
+        <a href="/videos/{{$video->id}}">{{$video->id}}</a>
     @endforeach
 @endsection
 
